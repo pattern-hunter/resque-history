@@ -32,7 +32,8 @@ module Resque
         Resque.redis.lpush(HISTORY_SET_NAME, {:class => "#{self}",
                                               :args => args,
                                               :time => Time.now.strftime("%Y-%m-%d %H:%M:%S %z"),
-                                              :execution =>elapsed_seconds
+                                              :execution => elapsed_seconds,
+                                              :output => "This is test output, this process took #{elapsed_seconds} seconds"
         }.to_json)
 
         if Resque.redis.llen(HISTORY_SET_NAME) > maximum_history_size
